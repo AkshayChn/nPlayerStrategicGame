@@ -17,6 +17,7 @@ def findMinForAction(dict, k_players, k_actions, player, action):
             #min_strat = i+1
     ##found best strategy
     ##next find if anything else is as good
+"""    
     ret = []
     ret.append(min)
     
@@ -28,7 +29,7 @@ def findMinForAction(dict, k_players, k_actions, player, action):
             if (strats[i] != min):
                 ret.append(strats[i])
                 #retStrat.append(i+1)
-    
+"""    
     #print ret
     #print min_val
     #print retStrat
@@ -84,7 +85,7 @@ def good_test():
     #game = "./games/weakdom"
     #game = "./zero-sum-game-test-simple"
     maxmin(game)
-good_test()
+#good_test()
 
 def bad_test():             
     #PSNE("./games/weakdom")
