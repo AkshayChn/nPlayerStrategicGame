@@ -17,6 +17,7 @@ def findMinForAction(dict, k_players, k_actions, player, action):
             #min_strat = i+1
     ##found best strategy
     ##next find if anything else is as good
+    return min_val #list of strategies which have min payoff
 """    
     ret = []
     ret.append(min)
@@ -33,7 +34,7 @@ def findMinForAction(dict, k_players, k_actions, player, action):
     #print ret
     #print min_val
     #print retStrat
-    return min_val#list of strategies which have min payoff
+    
 
 def findMaxOfMins(dict, k_players, k_actions, player):
     actions = []

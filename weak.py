@@ -79,7 +79,14 @@ def findWeaklyDominantEquilibria(dict, k_players, k_actions):#ret 0 if none exis
     for i in itertools.product(*dominantStratOfPlayers):
         print list(i)
 
-       
+def weakDom(filename):
+    dict = {}
+    game = filename
+    ip.buildUserTable(dict, game)
+    k_players = ip.findNumPlayers(game)
+    k_actions = ip.findNumActions(game)
+    findWeaklyDominantEquilibria(dict, k_players, k_actions)
+          
 if __name__ == "__main__":
     dict = {}
     #game = "./games/random-game-test-simple"

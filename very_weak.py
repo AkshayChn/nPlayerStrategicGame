@@ -57,6 +57,7 @@ def findVeryWeaklyDominantEquilibria(dict, k_players, k_actions):#ret 0 if none 
     for i in range(1, k_players+1):
         dominantStratOfPlayers.append(findVeryWeaklyDominantStrat(dict, k_players, k_actions, i))
     #print dominantStratOfPlayers
+    print "***************************************"
     print "Very weakly dominant strategy of the players"
     print "Player" + "\t" + "Strategies"
     for i in range(len(dominantStratOfPlayers)):
@@ -70,7 +71,15 @@ def findVeryWeaklyDominantEquilibria(dict, k_players, k_actions):#ret 0 if none 
     for i in itertools.product(*dominantStratOfPlayers):
         print list(i)
 
-       
+def veryWeakDom(filename):
+    dict = {}
+    game = filename
+    ip.buildUserTable(dict, game)
+    k_players = ip.findNumPlayers(game)
+    k_actions = ip.findNumActions(game)
+    findVeryWeaklyDominantEquilibria(dict, k_players, k_actions)
+    
+           
 if __name__ == "__main__":
     dict = {}
     game = "./games/random-game-test-simple"

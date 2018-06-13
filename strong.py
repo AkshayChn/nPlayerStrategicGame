@@ -61,7 +61,15 @@ def findStronglyDominantEquilibrium(dict, k_players, k_actions):#ret 0 if none e
     else:
         print "The strongly dominant strategy equilibrium is: "
         print str(dominantStratOfPlayers)
-        
+
+def strongDom(filename):
+    dict = {}
+    game = filename
+    ip.buildUserTable(dict, game)
+    k_players = ip.findNumPlayers(game)
+    k_actions = ip.findNumActions(game)
+    findStronglyDominantEquilibrium(dict, k_players, k_actions)    
+"""        
 if __name__ == "__main__":
     dict = {}
     game = "./games/random-game-test-simple"
@@ -71,5 +79,5 @@ if __name__ == "__main__":
     ##print dict
     player  = 2
     findStronglyDominantEquilibrium(dict, 2, 2)
-
+"""
 
