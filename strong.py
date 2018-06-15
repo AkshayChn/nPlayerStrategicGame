@@ -1,10 +1,3 @@
-"""
-strongly dominant strateges and equilibrium
-weakly dominant strateges and equilibrium
-very weakly dominant strateges and equilibrium
-all pure strategy nash equilibrium
-"""
-
 import input as ip
 import gen as gen
 
@@ -30,12 +23,9 @@ def isStronglyDominantVect(dict, k_players, k_action_vect, player, action):
                 #print "yay"
                 #print util_from_action[i] - util_from_otherStrat[i]    
     return iSD_flag
+  
     
-
-
-
-    
-def findStronglyDominantStratVect(dict, k_players, k_action_vect, player):#ret empty if none exists
+def findStronglyDominantStratVect(dict, k_players, k_action_vect, player):#ret 0 if none exists
     assert (player <= k_players), "Player Unknown, p>k_p"
     strat = 0
     for i in range(1, k_action_vect[player - 1]+1):
@@ -67,7 +57,7 @@ def strongDom(filename):
     k_players = ip.findNumPlayers(game)
     k_action_vect = ip.findActionsVect(game)
     findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect)
-#strongDom("./games/32-game")    
+strongDom("./games/zero-sum-game2")    
 """
 dict = {}
 game = "./games/random-game-test-simple"
