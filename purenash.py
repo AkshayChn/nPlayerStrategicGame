@@ -1,11 +1,11 @@
 import input as ip
 import gen as gen
 
-def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_actions, player):
+def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_action_vect, player):
     #for a given sminusi find the best response
     assert (player <= k_players), "Invalid player p>K_p"
     strats = []
-    for i in range(1, k_actions+1):
+    for i in range(1, k_action_vect[player - 1]+1):
         strats.append(i)
     #print "****"
     #print sminusi
@@ -14,14 +14,12 @@ def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_actions, player):
         sminusi[player-1] = i
         j = "  ".join(str(e) for e in sminusi)
         yield j
-        
-def strats_test():
-    for i in stratsOfPlayerAgainstSminusi([2,3],3, 3, 3):
-        print i
-    
-def bestResponse(dict, k_players, k_actions, player, sminusi):
+
+      
+
+def bestResponse(dict, k_players, k_action_vect, player, sminusi):
     strats = []
-    for i in stratsOfPlayerAgainstSminusi(sminusi, k_players, k_actions, player):
+    for i in stratsOfPlayerAgainstSminusi(sminusi, k_players, k_action_vect, player):
         #print i
         strats.append(i)
     #print strats
@@ -50,15 +48,18 @@ def bestResponse(dict, k_players, k_actions, player, sminusi):
     #print retStrat
     return ret
 
-def markBestResponse(dict, marker_dict, k_players, k_actions, player):
+def markBestResponse(dict, marker_dict, k_players, k_action_vect, player):
     #Sminusi = [[1,2],[2,3],[3,1]] #set of all other strategies
     Sminusi = []
-    for i in gen.stratGen_list(k_players -1, k_actions):
+    ac_vec = list(k_action_vect)
+    ac_vec.pop(player - 1)
+    #print ac_vec
+    for i in gen.stratGenVect_list(k_players - 1, ac_vec):
         Sminusi.append(i) #set of all other strategies
     #print Sminusi
     bestResponses = []
     for i in Sminusi:
-        bestResponses.extend(bestResponse(dict, k_players, k_actions, player, i))
+        bestResponses.extend(bestResponse(dict, k_players, k_action_vect, player, i))
     #print "bestResponsesare:"
     #print bestResponses
     for i in bestResponses:
@@ -66,19 +67,16 @@ def markBestResponse(dict, marker_dict, k_players, k_actions, player):
         #print marker_dict[i]
         marker_dict[i] = marker_dict[i] + 1
 
-def markAllBestResponses(dict, marker_dict, k_players, k_actions):
+def markAllBestResponses(dict, marker_dict, k_players, k_action_vect):
     for i in range(k_players):
-        markBestResponse(dict, marker_dict, k_players, k_actions, i+1)
+        markBestResponse(dict, marker_dict, k_players, k_action_vect, i+1)
             
 
-def makeEmptyMarkerDict(marker_dict, k_players, k_actions):
-    keys = 0
-    for i in gen.stratGen(k_players, k_actions):
-        marker_dict[i] = keys
 
-def findPSNE(marker_dict, k_players, k_actions):
+
+def findPSNE(marker_dict, k_players, k_action_vect):
     psne = []
-    for i in gen.stratGen(k_players, k_actions):
+    for i in gen.stratGenVect(k_players, k_action_vect):
         if(marker_dict[i] == k_players):
             psne.append(i)
     print "****************"
@@ -88,38 +86,44 @@ def findPSNE(marker_dict, k_players, k_actions):
             print i
     else:
         print "No PSNE found"
+
 def PSNE(filename):
     dict = {}
     ip.buildUserTable(dict, filename)
     k_players = ip.findNumPlayers(filename)
-    k_actions = ip.findNumActions(filename)
+    k_action_vect = ip.findActionsVect(filename)
     marker_dict = {}
-    makeEmptyMarkerDict(marker_dict, k_players, k_actions)
-    markAllBestResponses(dict, marker_dict, k_players, k_actions)
-    findPSNE(marker_dict, k_players, k_actions)
+    makeEmptyMarkerDict(marker_dict, k_players, k_action_vect)
+    markAllBestResponses(dict, marker_dict, k_players, k_action_vect)
+    findPSNE(marker_dict, k_players, k_action_vect)
 
-def psne_test():
+def makeEmptyMarkerDict(marker_dict, k_players, k_action_vect):
+    keys = 0
+    for i in gen.stratGenVect(k_players, k_action_vect):
+        marker_dict[i] = keys
+
+def good_test():
     dict = {}
     game = "./games/random-game-test-simple"
     #game = "./games/zero-sum-game2"
     game = "./games/veryweakdom"
-    game = "./games/weakdom"
+    #game = "./games/weakdom"
+    #game = "./games/32-game"
+
     #game = "./zero-sum-game-test-simple"
     ip.buildUserTable(dict, game)
-    ##print dict
     k_players = ip.findNumPlayers(game)
-    #print k_players
-    k_actions = ip.findNumActions(game)
-    marker_dict = {}
-    makeEmptyMarkerDict(marker_dict, k_players ,k_actions )   
-    print "markerdict is"
-    print marker_dict      
-    #markBestResponse(dict, marker_dict, k_players, k_actions, 1)
-    markAllBestResponses(dict, marker_dict, k_players, k_actions)
-    print "markerdict is"
-    print marker_dict
-    print "********"
-    findPSNE(marker_dict, k_players, k_actions)
 
-#PSNE("./games/weakdom")
-#psne_test()
+    k_action_vect = ip.findActionsVect(game)
+    marker_dict = {}
+    makeEmptyMarkerDict(marker_dict, k_players ,k_action_vect )   
+
+    #for i in stratsOfPlayerAgainstSminusi([2,3], 3, k_action_vect, 1):
+     #   print i
+    #print bestResponse(dict, k_players, k_action_vect, 1, [2,3])
+    #markBestResponse(dict, marker_dict, k_players, k_action_vect, 2)
+    #markAllBestResponses(dict, marker_dict, k_players, k_action_vect)
+    PSNE(game)
+
+    #PSNE("./games/weakdom")
+    #psne_test()

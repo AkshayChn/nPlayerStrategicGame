@@ -25,8 +25,8 @@ def stratGenVect(k_players, action_vect):
             ac.append(j + 1)
             #print "j\n"
         pl.append(ac)
-    print "action_vect is:" + str(action_vect)
-    print "pl is :" + str(pl)
+    #print "action_vect is:" + str(action_vect)
+    #print "pl is :" + str(pl)
     import itertools
     for i in itertools.product(*pl):
         j = "  ".join(map(str, i))

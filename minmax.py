@@ -17,9 +17,7 @@ def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_actions, player):
         j = "  ".join(str(e) for e in sminusi)
         yield j
         
-def strats_test():
-    for i in stratsOfPlayerAgainstSminusi([2,3],3, 3, 3):
-        print i
+
     
 def bestResponse(dict, k_players, k_actions, player, sminusi):
     strats = []
