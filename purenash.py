@@ -82,10 +82,12 @@ def findPSNE(marker_dict, k_players, k_actions):
         if(marker_dict[i] == k_players):
             psne.append(i)
     print "****************"
-    print "The following strategy profiles are PSNE"
-    for i in psne:
-        print i
-
+    if psne:
+        print "The following strategy profiles are PSNE"
+        for i in psne:
+            print i
+    else:
+        print "No PSNE found"
 def PSNE(filename):
     dict = {}
     ip.buildUserTable(dict, filename)
