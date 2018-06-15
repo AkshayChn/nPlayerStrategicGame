@@ -15,6 +15,41 @@ def findNumPlayers(filename):
             #print key + "***" + val
             return int(val)
         
+
+            
+
+def findActionsVect(filename):
+    rF = open(filename, "r")
+    for line in rF:
+        if line.startswith("# Actions:"):
+            (key, val) = line.split(":	")
+            actions = "a"
+            #print val
+            val_list = []
+            val_list = map(int, val.split(' '))
+            #print val_list
+            #print val_list[0] + 2
+            #for i in line.split(" "):
+             #   actions = i
+            #return int(actions)
+    return val_list
+"""    
+import gen
+dict = {}
+game = "./games/dominant"
+game = "./games/random-game-test-simple"
+game = "./games/32-game"
+print game
+k_players = findNumPlayers(game)
+s = findActionsVect(game)
+#gen.stratGenVect_list(k_players, s)
+gen.Sminusi_withVect(k_players, s, 2,3)
+"""
+
+"""
+**************************************************************************************
+"""
+    
 def findNumActions(filename):
     rF = open(filename, "r")
     for line in rF:
@@ -24,8 +59,7 @@ def findNumActions(filename):
             for i in line.split(" "):
                 actions = i
             return int(actions)
-            
-        
+       
 def buildUserTable_test():            
     dict = {}
     game = "./games/random-game-test-simple"

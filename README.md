@@ -11,3 +11,6 @@
 7- all pure strategy Nash equilibrium, if they exist
 8-maxmin values of all players and all their maxmin strategies
 9- mimmax values of all players and all minmax strategy profiles against each player
+
+##Usage:
+python main.py <gamut_game_filename\>

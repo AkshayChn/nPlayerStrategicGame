@@ -2,3 +2,9 @@ java -jar gamut.jar -g PrisonersDilemma -f dominant -random_seed 0
 
 Nplayerprisonersdile:
 java -jar gamut.jar -g NPlayerPrisonersDilemma -f nppd -random_seed 0 -players 3 -function_X 7 -function_Y 5 -function_Z 10
+
+Random_zero_sum_game:
+java -jar gamut.jar -g RandomZeroSum -actions 4 4 -f zero-sum-game1
+
+random_game with uniform payoffs:
+-g RandomGame -actions 3 3 3 -f random-game-test-simple -random_seed 0 -players 3

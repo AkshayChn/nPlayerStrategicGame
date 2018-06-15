@@ -8,48 +8,46 @@ all pure strategy nash equilibrium
 import input as ip
 import gen as gen
 
-def runAllTests():
-    ##ip.buildUserTable_test()
-    ##gen.stratGen_test()
-    for i in gen.Sminusi(3, 3, 2, 1):
-        print i
-        
-def isStronglyDominant(dict, k_players, k_actions, player, action):
+def isStronglyDominantVect(dict, k_players, k_action_vect, player, action):
     iSD_flag = True
     dominatedStrategies = []
-    for i in range(1, k_actions+1):
+    for i in range(1, k_action_vect[player - 1] + 1):
         dominatedStrategies.append(i)
     dominatedStrategies.remove(action)
-    #print "yay"
-    #print dominatedStrategies
+    
     for otherStrat in dominatedStrategies:
         #action > otherStrat for all sminusi
         util_from_action = []
         util_from_otherStrat = []
-        for i in gen.Sminusi(k_players, k_actions, player, action):
+        for i in gen.Sminusi_withVect(k_players, k_action_vect, player, action):
             util_from_action.append((dict[i][player - 1]))
-        for i in gen.Sminusi(k_players, k_actions, player, otherStrat):
+        for i in gen.Sminusi_withVect(k_players, k_action_vect, player, otherStrat):
             util_from_otherStrat.append((dict[i][player - 1]))
-        #print util_from_action
-        #print util_from_otherStrat
+    #print "dominated strategies are : " + str(dominatedStrategies)
         for i in range(len(util_from_action)):
             if not (util_from_action[i] > util_from_otherStrat[i]):
                 iSD_flag = False
                 #print "yay"
-                #print util_from_action[i] - util_from_otherStrat[i]
-    return iSD_flag       
+                #print util_from_action[i] - util_from_otherStrat[i]    
+    return iSD_flag
+    
 
-def findStronglyDominantStrat(dict, k_players, k_actions, player):#ret 0 if none exists
+
+
+    
+def findStronglyDominantStratVect(dict, k_players, k_action_vect, player):#ret empty if none exists
+    assert (player <= k_players), "Player Unknown, p>k_p"
     strat = 0
-    for i in range(1, k_actions+1):
-        if(isStronglyDominant(dict, k_players, k_actions, player, i)):
+    for i in range(1, k_action_vect[player - 1]+1):
+        if(isStronglyDominantVect(dict, k_players, k_action_vect, player, i)):
             strat = i
     return strat
     
-def findStronglyDominantEquilibrium(dict, k_players, k_actions):#ret 0 if none exists
+
+def findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect):#ret 0 if none exists
     dominantStratOfPlayers = []
     for i in range(1, k_players+1):
-        dominantStratOfPlayers.append(findStronglyDominantStrat(dict, k_players, k_actions, i))
+        dominantStratOfPlayers.append(findStronglyDominantStratVect(dict, k_players, k_action_vect, i))
     print "The strongly dominant strategies are as follows"
     print "Player" + "\t" + "Strategy"
     
@@ -67,17 +65,21 @@ def strongDom(filename):
     game = filename
     ip.buildUserTable(dict, game)
     k_players = ip.findNumPlayers(game)
-    k_actions = ip.findNumActions(game)
-    findStronglyDominantEquilibrium(dict, k_players, k_actions)    
-"""        
-if __name__ == "__main__":
-    dict = {}
-    game = "./games/random-game-test-simple"
-    game = "./games/strongdom"
-    #game = "./zero-sum-game-test-simple"
-    ip.buildUserTable(dict, game)
-    ##print dict
-    player  = 2
-    findStronglyDominantEquilibrium(dict, 2, 2)
+    k_action_vect = ip.findActionsVect(game)
+    findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect)
+#strongDom("./games/32-game")    
 """
-
+dict = {}
+game = "./games/random-game-test-simple"
+game = "./games/strongdom"
+#game = "./games/32-game"
+#game = "./zero-sum-game-test-simple"
+ip.buildUserTable(dict, game)
+k_players = ip.findNumPlayers(game)
+#print k_players
+k_action_vect = ip.findActionsVect(game)  
+#print k_action_vect
+#print isStronglyDominantVect(dict, k_players, k_action_vect, 2, 2)
+print findStronglyDominantStratVect(dict, k_players, k_action_vect, 2)
+findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect)
+"""
