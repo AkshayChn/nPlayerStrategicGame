@@ -36,13 +36,7 @@ def isVeryWeaklyDominantVect(dict, k_players, k_action_vect, player, action):
         for i in range(len(util_from_action)):
             if not (util_from_action[i] >= util_from_otherStrat[i]):
                 iWD_flag = False
-                #print "yay"
-                #print util_from_action[i] - util_from_otherStrat[i]
     return iWD_flag 
-
-
-
-
 
 def findVeryWeaklyDominantStratVect(dict, k_players, k_action_vect, player):#ret 0 if none exists
     strat = []
@@ -70,8 +64,6 @@ def findVeryWeaklyDominantEquilibriaVect(dict, k_players, k_action_vect):#ret 0 
     print "The following are very weakly dominant strategy equilibria"
     for i in itertools.product(*dominantStratOfPlayers):
         print list(i)
-
-
 
 def veryWeakDom(filename):
     dict = {}

@@ -1,4 +1,7 @@
 def buildUserTable(emptyTable, filename):
+    """
+    Reads the file and writes the payoffs to a dictionary
+    """
     rF = open(filename, "r")
     for line in rF:
         if not line.startswith("#"):
@@ -8,17 +11,20 @@ def buildUserTable(emptyTable, filename):
             emptyTable[key] =  util_float
 
 def findNumPlayers(filename):
+    """
+    Returns the total number of players
+    """
     rF = open(filename, "r")
     for line in rF:
         if line.startswith("# Players:"):
             (key, val) = line.split(":	")
             #print key + "***" + val
             return int(val)
-        
-
-            
 
 def findActionsVect(filename):
+    """
+    Returns a vector of the number of strategies of each player
+    """
     rF = open(filename, "r")
     for line in rF:
         if line.startswith("# Actions:"):
@@ -33,46 +39,4 @@ def findActionsVect(filename):
              #   actions = i
             #return int(actions)
     return val_list
-"""    
-import gen
-dict = {}
-game = "./games/dominant"
-game = "./games/random-game-test-simple"
-game = "./games/32-game"
-print game
-k_players = findNumPlayers(game)
-s = findActionsVect(game)
-#gen.stratGenVect_list(k_players, s)
-gen.Sminusi_withVect(k_players, s, 2,3)
-"""
 
-"""
-**************************************************************************************
-"""
-    
-def findNumActions(filename):
-    rF = open(filename, "r")
-    for line in rF:
-        if line.startswith("# Actions:"):
-            (key, val) = line.split(":	")
-            actions = "a"
-            for i in line.split(" "):
-                actions = i
-            return int(actions)
-       
-def buildUserTable_test():            
-    dict = {}
-    game = "./games/random-game-test-simple"
-    #game = "./zero-sum-game-test-simple"
-    buildUserTable(dict, game)
-
-    dict['test'] = "test"
-    print dict
-
-    print dict['test']
-
-def findPlayers_test():
-    game = "./games/dominant"
-    #print "player = " + str(findNumPlayers(game))
-    print "actions =" 
-    print "asdf " + str(findNumActions(game))

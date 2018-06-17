@@ -7,8 +7,6 @@ def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_action_vect, player):
     strats = []
     for i in range(1, k_action_vect[player - 1]+1):
         strats.append(i)
-    #print "****"
-    #print sminusi
     sminusi.insert(player-1, 0)
     for i in strats:
         sminusi[player-1] = i
@@ -20,9 +18,7 @@ def stratsOfPlayerAgainstSminusi(sminusi, k_players, k_action_vect, player):
 def bestResponse(dict, k_players, k_action_vect, player, sminusi):
     strats = []
     for i in stratsOfPlayerAgainstSminusi(sminusi, k_players, k_action_vect, player):
-        #print i
         strats.append(i)
-    #print strats
     best = strats[0]
     best_strat = 0
     
@@ -30,8 +26,6 @@ def bestResponse(dict, k_players, k_action_vect, player, sminusi):
         if((dict[strats[i]][player - 1])>= dict[best][player - 1]):
             best = strats[i]
             best_strat = i+1
-    ##found best strategy
-    ##next find if anything else is as good
     ret = []
     ret.append(best)
     
@@ -43,16 +37,12 @@ def bestResponse(dict, k_players, k_action_vect, player, sminusi):
             if (strats[i] != best):
                 ret.append(strats[i])
                 retStrat.append(i+1)
-    
-    #print ret
-    #print retStrat
     return ret
 
 def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
     Sminusi = []
     ac_vec = list(k_action_vect)
     ac_vec.pop(player - 1)
-    #print ac_vec
     for i in gen.stratGenVect_list(k_players - 1, ac_vec):
         Sminusi.append(i) #set of all other strategies
     print Sminusi
@@ -64,10 +54,6 @@ def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
     maxValues = []
     for i in bestResponses:
         maxValues.append(dict[i][player - 1])
-    #print bestResponses
-    #print maxValues
-    #print "bestResponsesare:"
-    #print bestResponses
     
     #finding minmax value
     min = maxValues[0]
@@ -77,8 +63,7 @@ def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
         if(maxValues[i] <= min):
             min = maxValues[i]
             minmax_strat_index = i
-    #print min
-    #print minmax_strat_index
+    
     minmax_value = min
     minmax_indices = []
     minmax_indices.append(minmax_strat_index)
@@ -86,12 +71,10 @@ def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
         if(maxValues[i] == min):
             if(i != minmax_strat_index):
                 minmax_indices.append(i)
-    #print minmax_indices
     
     minmaxStrats = []
     for i in minmax_indices:
         minmaxStrats.append(bestResponses[i])
-    #print minmaxStrats
     minmaxList = []
     for i in minmaxStrats:
         li = (map(int, i.split('  ')))
@@ -99,7 +82,6 @@ def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
         j = "  ".join(str(e) for e in li)
         minmaxList.append(j)
     minmaxList = list(set(minmaxList)) #remove duplicates
-    #print minmaxList
     print str(player) + " \t " + str(minmax_value) + " \t\t " + str(minmaxList)
 
 def findMinmaxForAllPlayers(dict, k_players, k_action_vect):

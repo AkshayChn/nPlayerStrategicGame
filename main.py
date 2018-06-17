@@ -7,7 +7,6 @@ import minmax
 import sys
 
 def runAll(game):
-    
     strong.strongDom(game)
     print ""
     weak.weakDom(game)
@@ -26,19 +25,10 @@ def usage():
     print "This program only accepts gamut games in the simple-output format"
 
 if __name__ == "__main__":
-    #print "This is the name of the script: ", sys.argv[0]
-    #print "Number of arguments: ", len(sys.argv)
-    #print "The arguments are: " , str(sys.argv)
-    
     if(len(sys.argv) != 2):
         usage()
     else:
         game = sys.argv[1]
-        #game = "./games/random-game-test-simple"
-        #game = "./games/strongdom"
-        #game = "./games/zero-sum-game2"
-        #game = "./games/nppd"
-        
         runAll(game)
     
 

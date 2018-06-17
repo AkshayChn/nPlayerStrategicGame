@@ -1,6 +1,10 @@
 import itertools
 
 def stratGenVect(k_players, action_vect):
+    """
+    Generates all strategy profiles of k_players given their strategy sets.
+    Returns a string
+    """
     pl = []
     for i in range(k_players):
         ac = []
@@ -12,6 +16,10 @@ def stratGenVect(k_players, action_vect):
         yield j
       
 def stratGenVect_list(k_players, action_vect):
+    """
+    Generates all strategy profiles of k_players given their strategy sets.
+    Returns a list of ints
+    """
     pl = []
     for i in range(k_players):
         ac = []
@@ -24,6 +32,10 @@ def stratGenVect_list(k_players, action_vect):
 
 
 def Sminusi_withVect(k_players, action_vect, player, action):
+    """
+    Generates all strategy profiles of k_players agains't the given action of the given player.
+    Returns a string
+    """
     assert (action <= action_vect[player - 1]), "Unknown Action, a>k_a in Sminusi: " + str(action) + " > " + str(action_vect[player - 1])
     
     lis = list(action_vect)
