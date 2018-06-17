@@ -71,25 +71,6 @@ def findVeryWeaklyDominantEquilibriaVect(dict, k_players, k_action_vect):#ret 0 
     for i in itertools.product(*dominantStratOfPlayers):
         print list(i)
 
-def findVeryWeaklyDominantEquilibria(dict, k_players, k_actions):#ret 0 if none exists
-    dominantStratOfPlayers = []
-    for i in range(1, k_players+1):
-        dominantStratOfPlayers.append(findVeryWeaklyDominantStrat(dict, k_players, k_actions, i))
-    #print dominantStratOfPlayers
-    print "***************************************"
-    print "Very weakly dominant strategy of the players"
-    print "Player" + "\t" + "Strategies"
-    for i in range(len(dominantStratOfPlayers)):
-        print str(i+1) + "\t" + str(dominantStratOfPlayers[i])
-    
-    if (isListEmpty(dominantStratOfPlayers)):
-        print "No very weakly dominant strategy equilibrium exists"
-        return 0
-    import itertools
-    print "The following are very weakly dominant strategy equilibria"
-    for i in itertools.product(*dominantStratOfPlayers):
-        print list(i)
-
 
 
 def veryWeakDom(filename):
