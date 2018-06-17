@@ -63,31 +63,4 @@ def maxmin(filename):
     k_action_vect = ip.findActionsVect(game)
     findAllMaxmins(dict, k_players, k_action_vect)    
 
-def good_test():
-    game = "./games/random-game-test-simple"
-    #game = "./games/32-game"
-    #game = "./games/zero-sum-game2"
-    #game = "./games/veryweakdom"
-    #game = "./games/weakdom"
-    
-    maxmin(game)
-good_test()
-
-def bad_test():             
-    #PSNE("./games/weakdom")
-    #psne_test()
-    dict = {}
-    game = "./games/random-game-test-simple"
-    #game = "./games/zero-sum-game2"
-    #game = "./games/veryweakdom"
-    #game = "./games/weakdom"
-    #game = "./zero-sum-game-test-simple"
-    ip.buildUserTable(dict, game)
-    ##print dict
-    k_players = ip.findNumPlayers(game)
-    #print k_players
-    k_actions = ip.findNumActions(game)
-    findMinForAction(dict, k_players, k_actions, 1, 2)    
-    #findMaxOfMins(dict, k_players, k_actions, 1)
-    findAllMaxmins(dict, k_players, k_actions)
 

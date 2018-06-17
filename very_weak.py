@@ -100,23 +100,3 @@ def veryWeakDom(filename):
     k_action_vect = ip.findActionsVect(game)
     findVeryWeaklyDominantEquilibriaVect(dict, k_players, k_action_vect)
 
-veryWeakDom("./games/32-game") 
-
-"""
-dict = {}
-game = "./games/random-game-test-simple"
-#game = "./games/veryweakdom"
-#game = "./games/32-game"
-#game = "./games/zero-sum-game2"
-ip.buildUserTable(dict, game)
-k_players = ip.findNumPlayers(game)
-#print k_players
-k_action_vect = ip.findActionsVect(game)
-#print k_action_vect
-#print isStronglyDominantVect(dict, k_players, k_action_vect, 2, 2)
-player = 1
-action = 2
-#print isVeryWeaklyDominantVect(dict, k_players, k_action_vect, player, action)
-#print findVeryWeaklyDominantStratVect(dict, k_players, k_action_vect, player)
-findVeryWeaklyDominantEquilibriaVect(dict, k_players, k_action_vect)
-"""

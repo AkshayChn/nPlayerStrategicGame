@@ -23,6 +23,7 @@ def runAll(game):
 
 def usage():
     print "Usage: python main.py <gamut_game_filename>"
+    print "This program only accepts gamut games in the simple-output format"
 
 if __name__ == "__main__":
     #print "This is the name of the script: ", sys.argv[0]

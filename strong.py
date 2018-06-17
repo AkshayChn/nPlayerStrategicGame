@@ -9,19 +9,16 @@ def isStronglyDominantVect(dict, k_players, k_action_vect, player, action):
     dominatedStrategies.remove(action)
     
     for otherStrat in dominatedStrategies:
-        #action > otherStrat for all sminusi
         util_from_action = []
         util_from_otherStrat = []
         for i in gen.Sminusi_withVect(k_players, k_action_vect, player, action):
             util_from_action.append((dict[i][player - 1]))
         for i in gen.Sminusi_withVect(k_players, k_action_vect, player, otherStrat):
             util_from_otherStrat.append((dict[i][player - 1]))
-    #print "dominated strategies are : " + str(dominatedStrategies)
         for i in range(len(util_from_action)):
             if not (util_from_action[i] > util_from_otherStrat[i]):
                 iSD_flag = False
-                #print "yay"
-                #print util_from_action[i] - util_from_otherStrat[i]    
+    
     return iSD_flag
   
     
@@ -38,7 +35,7 @@ def findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect):#ret 0 i
     dominantStratOfPlayers = []
     for i in range(1, k_players+1):
         dominantStratOfPlayers.append(findStronglyDominantStratVect(dict, k_players, k_action_vect, i))
-    print "The strongly dominant strategies are as follows"
+    print "\nThe strongly dominant strategies are as follows"
     print "Player" + "\t" + "Strategy"
     
     for i in range(len(dominantStratOfPlayers)):
@@ -57,19 +54,4 @@ def strongDom(filename):
     k_players = ip.findNumPlayers(game)
     k_action_vect = ip.findActionsVect(game)
     findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect)
-strongDom("./games/zero-sum-game2")    
-"""
-dict = {}
-game = "./games/random-game-test-simple"
-game = "./games/strongdom"
-#game = "./games/32-game"
-#game = "./zero-sum-game-test-simple"
-ip.buildUserTable(dict, game)
-k_players = ip.findNumPlayers(game)
-#print k_players
-k_action_vect = ip.findActionsVect(game)  
-#print k_action_vect
-#print isStronglyDominantVect(dict, k_players, k_action_vect, 2, 2)
-print findStronglyDominantStratVect(dict, k_players, k_action_vect, 2)
-findStronglyDominantEquilibriumVect(dict, k_players, k_action_vect)
-"""
+
