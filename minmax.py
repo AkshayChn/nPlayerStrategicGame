@@ -45,7 +45,7 @@ def findMaxForAllSminusi(dict, k_players, k_action_vect, player):
     ac_vec.pop(player - 1)
     for i in gen.stratGenVect_list(k_players - 1, ac_vec):
         Sminusi.append(i) #set of all other strategies
-    print Sminusi
+    #print Sminusi
     
     bestResponses = []
     for i in Sminusi:
